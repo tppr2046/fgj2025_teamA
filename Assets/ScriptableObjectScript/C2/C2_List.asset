@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8dd590327535dc43ac34c4218a544e3, type: 3}
   m_Name: C2_List
   m_EditorClassIdentifier: 
-  Contents:
+  ContentLevel:
   - {fileID: 11400000, guid: b2941139e1a60aa45bcb2b73b2d48e33, type: 2}
   - {fileID: 11400000, guid: 668f2dfeeaf86e745bb8d0668501fd55, type: 2}
   - {fileID: 11400000, guid: 9028c86f3a9159048b349a0af9942f2a, type: 2}
