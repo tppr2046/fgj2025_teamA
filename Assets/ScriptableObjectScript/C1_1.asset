@@ -12,10 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 513928bdc1b2e0f4398860222a7cfdba, type: 3}
   m_Name: C1_1
   m_EditorClassIdentifier: 
+  isQuestion: 0
   Content: "\u8DDF\u6211\u4E00\u8D77\u558A\u5927\u6210\u529F"
   Answers:
   - "\u5927"
   - "\u6210"
   - "\u529F"
   - 
+  - 
+  WrongAnswers:
+  - "\u723D"
+  - "\u611B"
+  - "\u6C92"
+  - "\u6211"
   - 
