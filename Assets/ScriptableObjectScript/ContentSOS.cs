@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ContentSOS", menuName = "Scriptable Objects/ContentSOS")]
-public class ContentSOS : ScriptableObject
+public class ContentLevel : ScriptableObject
 {
 public bool isQuestion;
 public string Content;

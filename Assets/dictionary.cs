@@ -8,12 +8,10 @@ public class dictionary : MonoBehaviour
     {
         { "greet", "你好！" },
         { "bye", "再見！" },
-        { "thanks", "謝謝你！" }
+        { "thanks", "謝謝你！"},
     };
 
     // 你可以根據需要新增更多語句
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // 範例：在 Unity Console 顯示一個語句
