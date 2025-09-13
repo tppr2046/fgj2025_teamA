@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 513928bdc1b2e0f4398860222a7cfdba, type: 3}
-  m_Name: C2_7
+  m_Name: C10_23
   m_EditorClassIdentifier: 
-  isQuestion: 0
-  Content: "\u9019\u500B\u7BB1\u5B50\u6703\u51FA\u7D05 "
+  isQuestion: 1
+  Content: "\u4E0D\u8981\u518D\u7576\u904A\u6232\u7684 NPC \u4E86\uFF0C \u5F9E\u4ECA\u5929\u8D77\u2500\u2500\u4F60\uFF0C\u5C31\u662F\u80FD\u62EF\u6551\u4E16\u754C\u7684\u4E3B\u4EBA\u516C\uFF01"
   Answers:
-  - "\u5C0D"
-  - "\u5C0D"
-  - "\u5C0D"
-  - "\u5C0D"
-  - "\u5C0D"
+  - "\u6B61\u547C"
+  - "\u6B61\u547C"
+  - "\u6B61\u547C"
+  - "\u6B61\u547C"
+  - "\u6B61\u547C"
   WrongAnswers:
-  - "\u8CED\u8F38\u4E86"
-  - "\u932F"
-  - "\u5565"
-  - "\u8CA0\u50B5\u4E86"
-  - "\u5403\u98EF"
+  - 
+  - 
+  - 
+  - 
+  - 

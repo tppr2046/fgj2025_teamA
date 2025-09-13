@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 513928bdc1b2e0f4398860222a7cfdba, type: 3}
-  m_Name: C2_7
+  m_Name: C10_20
   m_EditorClassIdentifier: 
-  isQuestion: 0
-  Content: "\u9019\u500B\u7BB1\u5B50\u6703\u51FA\u7D05 "
+  isQuestion: 1
+  Content: "\u5275\u9020\uFF01\u8B8A\u73FE\uFF01\u8D85\u8D8A\uFF01"
   Answers:
-  - "\u5C0D"
-  - "\u5C0D"
-  - "\u5C0D"
-  - "\u5C0D"
-  - "\u5C0D"
+  - "\u5275\u9020"
+  - "\u8B8A\u73FE"
+  - "\u8D85\u8D8A"
+  - 
+  - 
   WrongAnswers:
-  - "\u8CED\u8F38\u4E86"
-  - "\u932F"
-  - "\u5565"
-  - "\u8CA0\u50B5\u4E86"
-  - "\u5403\u98EF"
+  - 
+  - 
+  - 
+  - 
+  - 
