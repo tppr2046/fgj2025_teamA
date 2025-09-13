@@ -4,6 +4,6 @@ using UnityEngine;
 public class ListContentSOS : ScriptableObject
 {
 
-public ContentSOS[] Contents;
+public ContentLevel[] ContentLevel;
     
 }
