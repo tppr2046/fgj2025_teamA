@@ -16,13 +16,4 @@ MonoBehaviour:
   Content: "\u9084\u8A18\u5F97\u6253\u300A\u6953\u4E4B\u8C37\u300B\u7DF4\u529F\u7DF4\u5230\u51CC\u6668\u4E09\u9EDE\u3001\u624B\u90FD\u5728\u6296\u7684\u611F\u89BA\u55CE\uFF1F"
   Answers:
   - "\u8A18\u5F97"
-  - 
-  - 
-  - 
-  - 
-  WrongAnswers:
-  - 
-  - 
-  - 
-  - 
-  - 
+  WrongAnswers: []

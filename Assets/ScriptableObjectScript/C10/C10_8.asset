@@ -14,15 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isQuestion: 0
   Content: "\u4ECA\u5929\uFF0C\u6211\u544A\u8A34\u4F60\uFF0C\u958B\u767C\u904A\u6232\uFF0C\u4E0D\u7528\u6703\u4F01\u5283\uFF01\u4E0D\u7528\u6703\u7F8E\u8853\uFF01\u66F4\u4E0D\u7528\u61C2\u7A0B\u5F0F\uFF01"
-  Answers:
-  - 
-  - 
-  - 
-  - 
-  - 
-  WrongAnswers:
-  - 
-  - 
-  - 
-  - 
-  - 
+  Answers: []
+  WrongAnswers: []

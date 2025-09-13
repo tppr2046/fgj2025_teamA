@@ -17,12 +17,4 @@ MonoBehaviour:
   Answers:
   - "\u904A\u6232"
   - "\u5927\u4EA8"
-  - 
-  - 
-  - 
-  WrongAnswers:
-  - 
-  - 
-  - 
-  - 
-  - 
+  WrongAnswers: []

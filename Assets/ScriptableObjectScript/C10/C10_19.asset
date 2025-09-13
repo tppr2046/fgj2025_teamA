@@ -19,10 +19,4 @@ MonoBehaviour:
   - "\u7FFB\u8F49"
   - "\u4EBA\u751F"
   - "\u7684\u6B66\u5668"
-  - 
-  WrongAnswers:
-  - 
-  - 
-  - 
-  - 
-  - 
+  WrongAnswers: []

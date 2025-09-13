@@ -15,15 +15,5 @@ MonoBehaviour:
   isQuestion: 0
   Content: "\u5F9E\u5275\u610F\u5230\u4E0A\u67B6\uFF0C\u5168\u7A0B\u966A\u8DD1\uFF01
     \u4F60\u4E0D\u662F\u4E00\u500B\u4EBA\u958B\u767C\uFF0C\u4F60\u662F\u4E00\u6574\u500B\u5718\u968A\u5728\u5F8C\u9762\u63A8\u4F60\uFF01"
-  Answers:
-  - 
-  - 
-  - 
-  - 
-  - 
-  WrongAnswers:
-  - 
-  - 
-  - 
-  - 
-  - 
+  Answers: []
+  WrongAnswers: []
