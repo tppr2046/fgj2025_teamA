@@ -16,13 +16,4 @@ MonoBehaviour:
   Content: "\u4E0D\u662F\u91D1\u878D\uFF01\u4E0D\u662F\u623F\u5730\u7522\uFF01\u800C\u662F\u2500\u2500\u624B\uFF01\u6A5F\uFF01\u904A\uFF01\u6232\uFF01"
   Answers:
   - "\u6B61\u547C"
-  - 
-  - 
-  - 
-  - 
-  WrongAnswers:
-  - 
-  - 
-  - 
-  - 
-  - 
+  WrongAnswers: []

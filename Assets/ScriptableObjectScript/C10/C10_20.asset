@@ -18,11 +18,4 @@ MonoBehaviour:
   - "\u5275\u9020"
   - "\u8B8A\u73FE"
   - "\u8D85\u8D8A"
-  - 
-  - 
-  WrongAnswers:
-  - 
-  - 
-  - 
-  - 
-  - 
+  WrongAnswers: []

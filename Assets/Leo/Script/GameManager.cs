@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public int TalkLimit;
     public int FriendLimit;
     public int WinFriend;
+    [SerializeField] MainUIController mainUIController;
     private void Awake()
     {
 
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
     {
         levels = new List<ContentLevel>(listContentSOS.ContentLevel);
         Initial();
+        
     }
     public void NextRound()
     {
@@ -37,27 +39,38 @@ public class GameManager : MonoBehaviour
         CurrentLevelCount++;
         CurrentLevel = levels[CurrentLevelCount];
         Boss.Talk(CurrentLevel);
-        CurrentLevelAnswerIndex = 0;
-        CurrentLevelAnswer = CurrentLevel.Answers[CurrentLevelAnswerIndex];
 
-        List<People> list = new List<People>(Friend);
-
-        for (int i = 0; i < TalkLimit; i++)
+        if (CurrentLevel.isQuestion)
         {
-            if(list.Count==0) break;
-            int ran = Random.Range(0, list.Count);
-            if (CurrentAnswersIndex < CurrentLevel.Answers.Length)
+           
+
+            CurrentLevelAnswerIndex = 0;
+            CurrentLevelAnswer = CurrentLevel.Answers[CurrentLevelAnswerIndex];
+
+            List<People> list = new List<People>(Friend);
+            List<People> Templist = new List<People>(Friend);
+
+            for (int i = 0; i < TalkLimit; i++)
             {
-                list[ran].Talking(CurrentLevel.Answers[CurrentAnswersIndex]);
-                CurrentAnswersIndex++;
-            }
-            else if(CurrentFaultAnswersIndex< CurrentLevel.WrongAnswers.Length)
-            {
-                list[ran].Talking(CurrentLevel.WrongAnswers[CurrentFaultAnswersIndex]);
-                CurrentFaultAnswersIndex++;
-            }
+                if (list.Count == 0) break;
+                int ran = Random.Range(0, list.Count);
+                if (CurrentAnswersIndex < CurrentLevel.Answers.Length)
+                {
+                    list[ran].Talking(CurrentLevel.Answers[CurrentAnswersIndex]);
+                    CurrentAnswersIndex++;
+                }
+                else if (CurrentFaultAnswersIndex < CurrentLevel.WrongAnswers.Length)
+                {
+                    list[ran].Talking(CurrentLevel.WrongAnswers[CurrentFaultAnswersIndex]);
+                    CurrentFaultAnswersIndex++;
+                }
+                Templist.Add(list[ran]);
                 list.RemoveAt(ran);
+            }
+            mainUIController.ActionStart(CurrentLevel.Content, Templist, CurrentLevel.Answers);
         }
+        else mainUIController.OnlyUpdateText(CurrentLevel.Content);
+
     }
     public void WinRound()
     {
@@ -70,6 +83,7 @@ public class GameManager : MonoBehaviour
             Friend.Add(people[ran]);
             people.RemoveAt(ran);
         }
+        mainUIController.UpdateFriend(Friend);
         NextRound();
     }
     public void LostRound()
@@ -81,6 +95,7 @@ public class GameManager : MonoBehaviour
             people.Add(Friend[ran]);
             Friend.RemoveAt(ran);
         }
+        mainUIController.UpdateFriend(Friend);
         NextRound();
     }
     public void ApplyAnswer(string Answer)
@@ -112,5 +127,6 @@ public class GameManager : MonoBehaviour
             Friend.Add(people[ran]);
             people.Remove(people[ran]);
         }
+        mainUIController.UpdateFriend(Friend);
     }
 }

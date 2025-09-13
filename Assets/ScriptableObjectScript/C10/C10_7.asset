@@ -17,13 +17,4 @@ MonoBehaviour:
     \u4F60\u4E0D\u7518\u5FC3\u53EA\u662F\u73A9\u5BB6\uFF0C\u4F60\u9084\u60F3\u7576\u500B\u5275\u9020\u8005\uFF01"
   Answers:
   - "\u6B61\u547C"
-  - 
-  - 
-  - 
-  - 
-  WrongAnswers:
-  - 
-  - 
-  - 
-  - 
-  - 
+  WrongAnswers: []

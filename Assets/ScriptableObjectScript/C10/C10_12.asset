@@ -18,11 +18,4 @@ MonoBehaviour:
   - "\u4E0D"
   - "\u77E5"
   - "\u9053"
-  - 
-  - 
-  WrongAnswers:
-  - 
-  - 
-  - 
-  - 
-  - 
+  WrongAnswers: []

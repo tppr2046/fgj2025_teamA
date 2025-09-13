@@ -17,13 +17,4 @@ MonoBehaviour:
     \u300C\u5982\u679C\u9019\u904A\u6232\u662F\u6211\u505A\u7684\uFF0C\u90A3\u6211\u65E9\u5C31\u767C\u5927\u8CA1\u4E86\uFF01\u300D"
   Answers:
   - "\u6709"
-  - 
-  - 
-  - 
-  - 
-  WrongAnswers:
-  - 
-  - 
-  - 
-  - 
-  - 
+  WrongAnswers: []
