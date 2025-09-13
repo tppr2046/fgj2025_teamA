@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 513928bdc1b2e0f4398860222a7cfdba, type: 3}
   m_Name: C2_7
   m_EditorClassIdentifier: 
-  isQuestion: 1
+  isQuestion: 0
   Content: "\u9019\u500B\u7BB1\u5B50\u6703\u51FA\u7D05 "
   Answers:
   - "\u5C0D"
