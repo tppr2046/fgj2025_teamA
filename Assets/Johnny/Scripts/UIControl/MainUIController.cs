@@ -51,7 +51,6 @@ public class MainUIController : MonoBehaviour
 
         for (int i = 0; i < 45; i++)
         {
-            AudLabels[i].style.visibility = Visibility.Hidden;
             rndNumber = UnityEngine.Random.Range(0, 3);
 
             if (idList.Contains(i)) AudButtons[i].style.backgroundImage = friendPic[rndNumber];
@@ -109,20 +108,16 @@ public class MainUIController : MonoBehaviour
 
         int rndNumber = 0;
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < peopleList.Count; i++)
         {
-            if (i < peopleList.Count)
-            {
-                actID = peopleList[i].ID;
-                actText = peopleList[i].Talk;
+            actID = peopleList[i].ID;
+            actText = peopleList[i].Talk;
 
-                rndNumber = UnityEngine.Random.Range(0, 3);
+            rndNumber = UnityEngine.Random.Range(0, 3);
 
-                AudButtons[actID].style.backgroundImage = actorPic[rndNumber];
-                AudLabels[actID].text = actText;
-                AudLabels[actID].style.visibility = Visibility.Visible;
-            }
-            else AudLabels[i].style.visibility = Visibility.Hidden;
+            AudButtons[actID].style.backgroundImage = actorPic[rndNumber];
+            AudLabels[actID].text = actText;
+            AudLabels[actID].style.visibility = Visibility.Visible;
         }
 
         CountDownBar.style.width = Length.Percent(100);
@@ -151,6 +146,7 @@ public class MainUIController : MonoBehaviour
 
     private void ClickActor(ClickEvent clickEvent)
     {
+        if (_canPress==false) return;
         var panel = clickEvent.target as Button;
         int pressID = Int32.Parse(panel.text);
 

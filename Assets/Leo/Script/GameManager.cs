@@ -47,7 +47,9 @@ public class GameManager : MonoBehaviour
             CurrentLevelAnswer = CurrentLevel.Answers[CurrentLevelAnswerIndex];
 
             List<People> list = new List<People>(Friend);
-            List<People> Templist = new List<People>(Friend);
+            List<People> Templist = new List<People>();
+
+            Templist.Clear();
 
             for (int i = 0; i < TalkLimit; i++)
             {
@@ -57,13 +59,14 @@ public class GameManager : MonoBehaviour
                 {
                     list[ran].Talking(CurrentLevel.Answers[CurrentAnswersIndex]);
                     CurrentAnswersIndex++;
+                    Templist.Add(list[ran]);
                 }
                 else if (CurrentFaultAnswersIndex < CurrentLevel.WrongAnswers.Length)
                 {
                     list[ran].Talking(CurrentLevel.WrongAnswers[CurrentFaultAnswersIndex]);
                     CurrentFaultAnswersIndex++;
+                    Templist.Add(list[ran]);
                 }
-                Templist.Add(list[ran]);
                 list.RemoveAt(ran);
             }
             mainUIController.ActionStart(CurrentLevel.Content, Templist, CurrentLevel.Answers);
@@ -78,6 +81,7 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < WinFriend; i++)
         {
+            if (people.Count == 0) break;
             int ran = Random.Range(0, people.Count);
             people[ran].ChangeType(Type.Friend);
             Friend.Add(people[ran]);
