@@ -201,4 +201,5 @@
             <ui:Button name="AudButton" style="position: absolute; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-color: rgba(0, 0, 0, 0); width: 80%; height: 50%; top: 40%; background-image: url(&quot;project://database/Assets/images/crowd1.png?fileID=-1658228231&amp;guid=3cdbc110300c9b947a0d76eb47f7b4b9&amp;type=3#crowd1_8&quot;); align-self: center;" />
         </ui:VisualElement>
     </ui:VisualElement>
+    <ui:Label name="ShowLabel" style="position: absolute; top: 40%; left: 40%; width: 20%; height: 20%; background-color: rgba(0, 0, 0, 0.77); -unity-font-definition: url(&quot;project://database/Assets/font/Silver.ttf?fileID=12800000&amp;guid=37fb631513cdb6248bad45c5a92c7172&amp;type=3#Silver&quot;); font-size: 150px; color: rgb(255, 255, 255); -unity-text-align: lower-center;" />
 </ui:UXML>

@@ -32,6 +32,7 @@ public class MainUIController : MonoBehaviour
     VisualElement[] AudPanels = new VisualElement[45];
     Label[] AudLabels = new Label[45];
     Button[] AudButtons = new Button[45];
+    Label ShowLabel;
 
     //更新People狀態
     public void UpdateFriend(List<People> peopleList) //List people
@@ -106,7 +107,7 @@ public class MainUIController : MonoBehaviour
 
         int rndNumber = 0;
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < peopleList.Count; i++)
         {
             actID = peopleList[i].ID;
             actText = peopleList[i].Talk;
@@ -128,6 +129,7 @@ public class MainUIController : MonoBehaviour
     private void JudgeRight()
     {
         _canPress = false;
+        
         //播放成功動畫
         CountDownBar.style.visibility = Visibility.Hidden;
         StartCoroutine(Right());
@@ -168,6 +170,8 @@ public class MainUIController : MonoBehaviour
         //指定UI元素 & 初始顯示設定
 
         rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
+        ShowLabel = rootVisualElement.Q<Label>("ShowLabel");
+        ShowLabel.style.visibility = Visibility.Hidden;
         MainTextLabel = rootVisualElement.Q<Label>("MainTextLabel");
         MainTextLabel.text = "";
 
@@ -215,14 +219,19 @@ public class MainUIController : MonoBehaviour
     }
     IEnumerator Right()
     {
+        ShowLabel.text = "成功!";
+        ShowLabel.style.visibility = Visibility.Visible;
         yield return new WaitForSeconds(rightTime);
-
+        ShowLabel.style.visibility = Visibility.Hidden;
         gameManager.WinRound();
 
     }
     IEnumerator Wrong()
     {
+        ShowLabel.text = "失敗!";
+        ShowLabel.style.visibility = Visibility.Visible;
         yield return new WaitForSeconds(wrongTime);
+        ShowLabel.style.visibility = Visibility.Hidden;
         gameManager.LostRound();
 
     }
