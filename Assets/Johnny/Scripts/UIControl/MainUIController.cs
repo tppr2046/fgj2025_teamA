@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -10,11 +12,16 @@ public class MainUIController : MonoBehaviour
     [SerializeField] Color normalColor;
     [SerializeField] Color RightColor;
     [SerializeField] float actionTime = 5;
+    [SerializeField] float rightTime = 3;
+    [SerializeField] float wrongTime = 3;
+    [SerializeField] float noAnswerTime = 3;
+    [SerializeField] GameManager gameManager;
 
     private bool _canPress = false;
     private float _actionStartTime = 0;
     private int _currentPress;
     private int _maxPress;
+    private string[] _answerString = new string[5];
 
     //UI元素
     VisualElement rootVisualElement;
@@ -27,15 +34,15 @@ public class MainUIController : MonoBehaviour
     Button[] AudButtons = new Button[45];
 
     //更新People狀態
-    public void UpdateFriend() //List people
+    public void UpdateFriend(List<People> peopleList) //List people
     {
         List<int> idList = new List<int>();
 
-        int friendNum = 5; //這裡改成People List的Count數
+        int friendNum = peopleList.Count; 
 
         for (int i = 0; i < friendNum; i++)
         {
-            idList.Add(i); //這裡改成People List的ID
+            idList.Add(peopleList[i].ID); //這裡改成People List的ID
         }
 
         for (int i = 0; i < 45; i++)
@@ -61,22 +68,25 @@ public class MainUIController : MonoBehaviour
                 ActionDashs[i].style.visibility = Visibility.Hidden;
             }
         }
+
+        StartCoroutine(None());
     }
 
-    public void ActionStart(string textSHow) //List people 5個人 、答案陣列
+    public void ActionStart(string textSHow, List<People> peopleList, string[] answers ) 
     {
         MainTextLabel.text = textSHow;
 
-        _maxPress = 0;  //答案陣列Count
+        _maxPress = answers.Length; 
         _currentPress = 0;
 
         for (int i = 0; i < 5; i++) 
         {
             if (i < _maxPress) 
             {
-                ActionLabels[i].text = ""; //答案陣列文字
+                ActionLabels[i].text = answers[i];
                 ActionLabels[i].style.color = normalColor;
                 ActionLabels[i].style.visibility = Visibility.Visible;
+                _answerString[i] = answers[i];
             }
             else ActionLabels[i].style.visibility = Visibility.Hidden;
         }
@@ -92,8 +102,8 @@ public class MainUIController : MonoBehaviour
 
         for (int i = 0; i < 5; i++)
         {
-            actID = 0; //People List ID 
-            actText = ""; //People List String 
+            actID = peopleList[i].ID;
+            actText = peopleList[i].Talk;
 
             AudButtons[actID].style.backgroundImage = actorPic;
             AudLabels[actID].text = actText;
@@ -109,21 +119,37 @@ public class MainUIController : MonoBehaviour
 
     private void JudgeRight()
     {
-
-
+        _canPress = false;
+        //播放成功動畫
+        CountDownBar.style.visibility = Visibility.Hidden;
+        StartCoroutine(Right());
     }
 
     private void JudgeWrong()
     {
         _canPress = false;
-
-        //播放失敗音效
-
+        //播放失敗動畫
+        CountDownBar.style.visibility = Visibility.Hidden;
+        StartCoroutine(Wrong());
     }
 
-    private void TimesUp()
+    private void ClickActor(ClickEvent clickEvent)
     {
-        _canPress = false;
+        var panel = clickEvent.target as Button;
+        int pressID = Int32.Parse(panel.text);
+
+        string pressString = AudLabels[pressID].text;
+        string correctString = _answerString[_currentPress];
+
+        if (pressString == correctString)
+        {
+            //播放正確字串移動
+
+            ActionLabels[_currentPress].style.color = RightColor;
+            _currentPress++;
+            if (_currentPress > _maxPress) JudgeRight();
+        }
+        else JudgeWrong();
     }
 
     private void Awake()
@@ -158,12 +184,9 @@ public class MainUIController : MonoBehaviour
             AudLabels[i].text = "";
             AudLabels[i].style.visibility = Visibility.Hidden;
             AudButtons[i] = AudPanels[i].Q<Button>("AudButton");
+            AudButtons[i].text = i.ToString();
+            AudButtons[i].RegisterCallback<ClickEvent>(ClickActor);
         }
-
-        //Button指定
-
-
-
     }
 
     private void Update()
@@ -178,7 +201,24 @@ public class MainUIController : MonoBehaviour
 
         CountDownBar.style.width = Length.Percent(barRatio * 100);
 
-        if (_actionStartTime >= actionTime) TimesUp();
+        if (_actionStartTime >= actionTime) JudgeWrong();
     }
+    IEnumerator Right()
+    {
+        yield return new WaitForSeconds(rightTime);
 
+        gameManager.WinRound();
+
+    }
+    IEnumerator Wrong()
+    {
+        yield return new WaitForSeconds(wrongTime);
+        gameManager.LostRound();
+
+    }
+    IEnumerator None()
+    {
+        yield return new WaitForSeconds(noAnswerTime);
+        gameManager.NextRound();
+    }
 }

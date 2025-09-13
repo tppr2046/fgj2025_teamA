@@ -27,6 +27,7 @@ public class People : MonoBehaviour
     public void Talking(string content)
     {
         Debug.Log(gameObject + ": "+ content);
+        Talk = content;
     }
     void UpdateSkin()
     {
