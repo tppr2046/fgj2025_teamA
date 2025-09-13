@@ -6,9 +6,9 @@ using UnityEngine.UIElements;
 
 public class MainUIController : MonoBehaviour
 {
-    [SerializeField] Texture2D nonePic;
-    [SerializeField] Texture2D friendPic;
-    [SerializeField] Texture2D actorPic;
+    [SerializeField] Texture2D[] nonePic;
+    [SerializeField] Texture2D[] friendPic;
+    [SerializeField] Texture2D[] actorPic;
     [SerializeField] Color normalColor;
     [SerializeField] Color RightColor;
     [SerializeField] float actionTime = 5;
@@ -45,10 +45,14 @@ public class MainUIController : MonoBehaviour
             idList.Add(peopleList[i].ID); //這裡改成People List的ID
         }
 
+        int rndNumber = 0;
+
         for (int i = 0; i < 45; i++)
         {
-            if (idList.Contains(i)) AudButtons[i].style.backgroundImage = friendPic;
-            else AudButtons[i].style.backgroundImage = nonePic;
+            rndNumber = UnityEngine.Random.Range(0, 3);
+
+            if (idList.Contains(i)) AudButtons[i].style.backgroundImage = friendPic[rndNumber];
+            else AudButtons[i].style.backgroundImage = nonePic[rndNumber];
 
             AudLabels[i].text = "";
             AudLabels[i].style.visibility = Visibility.Hidden;
@@ -72,7 +76,7 @@ public class MainUIController : MonoBehaviour
         StartCoroutine(None());
     }
 
-    public void ActionStart(string textSHow, List<People> peopleList, string[] answers ) 
+    public void ActionStart(string textSHow, List<People> peopleList, string[] answers) 
     {
         MainTextLabel.text = textSHow;
 
@@ -93,19 +97,23 @@ public class MainUIController : MonoBehaviour
 
         for (int i = 0; i < 4; i++)
         {
-            if (i < _maxPress - 1) ActionDashs[i].style.visibility = Visibility.Hidden;
+            if (i < _maxPress - 1) ActionDashs[i].style.visibility = Visibility.Visible;
             else ActionDashs[i].style.visibility = Visibility.Hidden;
         }
 
         int actID = 0;
         string actText = "";
 
+        int rndNumber = 0;
+
         for (int i = 0; i < 5; i++)
         {
             actID = peopleList[i].ID;
             actText = peopleList[i].Talk;
 
-            AudButtons[actID].style.backgroundImage = actorPic;
+            rndNumber = UnityEngine.Random.Range(0, 3);
+
+            AudButtons[actID].style.backgroundImage = actorPic[rndNumber];
             AudLabels[actID].text = actText;
             AudLabels[actID].style.visibility = Visibility.Visible;
         }
@@ -158,6 +166,8 @@ public class MainUIController : MonoBehaviour
         _canPress = false;
 
         //指定UI元素 & 初始顯示設定
+
+        rootVisualElement = GetComponent<UIDocument>().rootVisualElement;
         MainTextLabel = rootVisualElement.Q<Label>("MainTextLabel");
         MainTextLabel.text = "";
 

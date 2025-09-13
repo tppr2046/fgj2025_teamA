@@ -22,7 +22,7 @@ public class People : MonoBehaviour
     public void ChangeType(Type _type)
     {
         type = _type;
-        UpdateSkin();
+        //UpdateSkin();
     }
     public void Talking(string content)
     {
