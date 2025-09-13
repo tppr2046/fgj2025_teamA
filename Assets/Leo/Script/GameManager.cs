@@ -63,6 +63,7 @@ public class GameManager : MonoBehaviour
                     list[ran].Talking(CurrentLevel.WrongAnswers[CurrentFaultAnswersIndex]);
                     CurrentFaultAnswersIndex++;
                 }
+                Templist.Add(list[ran]);
                 list.RemoveAt(ran);
             }
             mainUIController.ActionStart(CurrentLevel.Content, Templist, CurrentLevel.Answers);

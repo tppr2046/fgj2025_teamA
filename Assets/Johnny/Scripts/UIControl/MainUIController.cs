@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -50,6 +51,7 @@ public class MainUIController : MonoBehaviour
 
         for (int i = 0; i < 45; i++)
         {
+            AudLabels[i].style.visibility = Visibility.Hidden;
             rndNumber = UnityEngine.Random.Range(0, 3);
 
             if (idList.Contains(i)) AudButtons[i].style.backgroundImage = friendPic[rndNumber];
@@ -107,16 +109,20 @@ public class MainUIController : MonoBehaviour
 
         int rndNumber = 0;
 
-        for (int i = 0; i < peopleList.Count; i++)
+        for (int i = 0; i < 5; i++)
         {
-            actID = peopleList[i].ID;
-            actText = peopleList[i].Talk;
+            if (i < peopleList.Count)
+            {
+                actID = peopleList[i].ID;
+                actText = peopleList[i].Talk;
 
-            rndNumber = UnityEngine.Random.Range(0, 3);
+                rndNumber = UnityEngine.Random.Range(0, 3);
 
-            AudButtons[actID].style.backgroundImage = actorPic[rndNumber];
-            AudLabels[actID].text = actText;
-            AudLabels[actID].style.visibility = Visibility.Visible;
+                AudButtons[actID].style.backgroundImage = actorPic[rndNumber];
+                AudLabels[actID].text = actText;
+                AudLabels[actID].style.visibility = Visibility.Visible;
+            }
+            else AudLabels[i].style.visibility = Visibility.Hidden;
         }
 
         CountDownBar.style.width = Length.Percent(100);
@@ -157,7 +163,7 @@ public class MainUIController : MonoBehaviour
 
             ActionLabels[_currentPress].style.color = RightColor;
             _currentPress++;
-            if (_currentPress > _maxPress) JudgeRight();
+            if (_currentPress >= _maxPress) JudgeRight();
         }
         else JudgeWrong();
     }
