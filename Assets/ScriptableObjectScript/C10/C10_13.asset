@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 513928bdc1b2e0f4398860222a7cfdba, type: 3}
-  m_Name: C1_9
+  m_Name: C10_13
   m_EditorClassIdentifier: 
-  isQuestion: 0
-  Content: "\u8981\u6210\u70BA\u81EA\u5DF1\u7684\u4E3B\u4EBA\uFF0C\u5FC5\u9808\u8981\u4E3B\u5BB0\u81EA\u5DF1\u7684\u9322"
+  isQuestion: 1
+  Content: "\u6DE8\u5229\u6F64\u9AD8\u9054 20 \u5104\u7F8E\u91D1\uFF0C 600 \u5104\u53F0\u5E63\uFF01\u4ED6\u5011\u4E0D\u53EA\u662F\u958B\u767C\u8005\uFF0C\u4ED6\u5011\u90FD\u662F\u5927\u5BCC\u7FC1\uFF01"
   Answers:
-  - 
-  - 
+  - "\u6B61\u547C"
+  - "\u6B61\u547C"
   - 
   - 
   - 
