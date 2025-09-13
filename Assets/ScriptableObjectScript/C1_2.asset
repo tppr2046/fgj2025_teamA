@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 513928bdc1b2e0f4398860222a7cfdba, type: 3}
   m_Name: C1_2
   m_EditorClassIdentifier: 
-  Content: 
+  isQuestion: 0
+  Content: AABBBXX
   Answers:
-  - 
-  - 
-  - 
-  - 
-  - 
+  - A
+  - B
+  - C
+  WrongAnswers:
+  - D
+  - E
+  - F
+  - G
+  - H
