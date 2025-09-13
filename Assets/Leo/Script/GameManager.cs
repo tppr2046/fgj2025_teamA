@@ -1,6 +1,5 @@
 
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,6 +9,7 @@ public class GameManager : MonoBehaviour
     public List<People> Friend;
     public boss101 Boss;
     [Header("Level")]
+    public ListContentSOS listContentSOS;
     public List<ContentLevel> levels = new List<ContentLevel>();
     public ContentLevel CurrentLevel;
     public int CurrentLevelCount;
@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        levels = new List<ContentLevel>(listContentSOS.ContentLevel);
         Initial();
     }
     public void NextRound()
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour
             Friend.Add(people[ran]);
             people.RemoveAt(ran);
         }
+        NextRound();
     }
     public void LostRound()
     {
@@ -79,6 +81,7 @@ public class GameManager : MonoBehaviour
             people.Add(Friend[ran]);
             Friend.RemoveAt(ran);
         }
+        NextRound();
     }
     public void ApplyAnswer(string Answer)
     {
