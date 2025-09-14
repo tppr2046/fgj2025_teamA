@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class MainUIController : MonoBehaviour
@@ -17,12 +19,17 @@ public class MainUIController : MonoBehaviour
     [SerializeField] float wrongTime = 3;
     [SerializeField] float noAnswerTime = 3;
     [SerializeField] float movingLabelTime = 1;
+    [SerializeField] float audHighFreqTime = 0.1f;
+    [SerializeField] UnityEvent OnActionRight;
+    [SerializeField] UnityEvent OnActionWrong;
 
     private bool _canPress = false;
+    private bool _audHigh = false;
     private bool[] _startMove = new bool[5];
     private Vector2[] _moveSpeed = new Vector2[5];
     private float[] _moveStartTime = new float[5];
     private float _actionStartTime = 0;
+    private float _audStartTime = 0;
     private int _currentPress;
     private int _maxPress;
     private string[] _answerString = new string[5];
@@ -136,9 +143,14 @@ public class MainUIController : MonoBehaviour
     private void JudgeRight()
     {
         _canPress = false;
-        
-        //播放成功動畫
         CountDownBar.style.visibility = Visibility.Hidden;
+
+        if (OnActionRight != null) OnActionRight.Invoke();
+
+        _audStartTime = 0;
+        _audHigh = true;
+        //播放成功動畫
+
         StartCoroutine(Right());
     }
 
@@ -214,6 +226,7 @@ public class MainUIController : MonoBehaviour
     {
         //初始設定
         _canPress = false;
+        _audHigh = false;
 
         //指定UI元素 & 初始顯示設定
 
@@ -261,24 +274,26 @@ public class MainUIController : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < 5; i++)
-        {
-            if (_startMove[i])
-            {
-                MovingLabels[i].style.left = Length.Percent(MovingLabels[i].style.left.value.value + _moveSpeed[i].x * Time.deltaTime);
-                MovingLabels[i].style.top = Length.Percent(MovingLabels[i].style.top.value.value + _moveSpeed[i].y * Time.deltaTime);
 
-                _moveStartTime[i] += Time.deltaTime;
-                
-                if (_moveStartTime[i] >= movingLabelTime)
+
+        if (_audHigh)
+        {
+            _audStartTime += Time.deltaTime;
+
+            if (_audStartTime >= audHighFreqTime)
+            {
+                int rndNum = 0;
+
+                for (int i = 0; i < _infectPoepleList.Count; i++)
                 {
-                    _startMove[i] = false;
-                    MovingLabels[i].style.visibility = Visibility.Hidden;
-                    ActionLabels[i].style.color = RightColor;
+                    rndNum = UnityEngine.Random.Range(0, 3);
+                    AudButtons[_infectPoepleList[i]].style.backgroundImage = friendPic[rndNum];
                 }
 
+                _audStartTime = 0;
             }
         }
+
         if (_canPress == false) return;
 
         _actionStartTime += Time.deltaTime;
@@ -291,12 +306,35 @@ public class MainUIController : MonoBehaviour
 
         if (_actionStartTime >= actionTime) JudgeWrong();
     }
+    private void FixedUpdate()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if (_startMove[i])
+            {
+                MovingLabels[i].style.left = Length.Percent(MovingLabels[i].style.left.value.value + _moveSpeed[i].x * Time.deltaTime);
+                MovingLabels[i].style.top = Length.Percent(MovingLabels[i].style.top.value.value + _moveSpeed[i].y * Time.deltaTime);
+
+                _moveStartTime[i] += Time.deltaTime;
+
+                if (_moveStartTime[i] >= movingLabelTime)
+                {
+                    _startMove[i] = false;
+                    MovingLabels[i].style.visibility = Visibility.Hidden;
+                    ActionLabels[i].style.color = RightColor;
+                }
+
+            }
+        }
+    }
+
     IEnumerator Right()
     {
         ShowLabel.text = "成功!";
         ShowLabel.style.visibility = Visibility.Visible;
         yield return new WaitForSeconds(rightTime);
         ShowLabel.style.visibility = Visibility.Hidden;
+        _audHigh = false;
         gameManager.WinRound();
 
     }
