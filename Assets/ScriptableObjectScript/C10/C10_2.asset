@@ -19,4 +19,5 @@ MonoBehaviour:
   - "\u5099"
   - "\u597D"
   - "\u4E86"
-  WrongAnswers: []
+  WrongAnswers:
+  - "\u9084\u6C92"
