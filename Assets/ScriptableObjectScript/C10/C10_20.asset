@@ -18,4 +18,8 @@ MonoBehaviour:
   - "\u5275\u9020"
   - "\u8B8A\u73FE"
   - "\u8D85\u8D8A"
-  WrongAnswers: []
+  WrongAnswers:
+  - "\u5EFA\u7ACB"
+  - "\u8B8A\u614B"
+  - "\u64CA\u843D"
+  - "\u88AB\u8D85\u8D8A"

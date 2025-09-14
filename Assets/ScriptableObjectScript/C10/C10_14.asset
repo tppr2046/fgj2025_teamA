@@ -16,4 +16,5 @@ MonoBehaviour:
   Content: "\u733F\u795E\uFF01"
   Answers:
   - "\u555F\u52D5"
-  WrongAnswers: []
+  WrongAnswers:
+  - "\u9A0E\u52D5"
