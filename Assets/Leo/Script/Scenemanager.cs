@@ -26,4 +26,14 @@ public class Scenemanager : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(0);
     }
+
+    public void LoadCredicScene()
+    {
+        SceneManager.LoadSceneAsync(3);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
