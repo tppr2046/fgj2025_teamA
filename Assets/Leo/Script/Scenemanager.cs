@@ -13,6 +13,7 @@ public class Scenemanager : MonoBehaviour
         
             DontDestroyOnLoad(this);
     }
+
     public void LoadScoreScene()
     {
 
