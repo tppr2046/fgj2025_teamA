@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -23,6 +22,8 @@ public class MainUIController : MonoBehaviour
     private int _currentPress;
     private int _maxPress;
     private string[] _answerString = new string[5];
+    private List<int> _canPressList = new List<int>();
+    private List<int> _infectPoepleList = new List<int>();
 
     //UI元素
     VisualElement rootVisualElement;
@@ -34,17 +35,16 @@ public class MainUIController : MonoBehaviour
     Label[] AudLabels = new Label[45];
     Button[] AudButtons = new Button[45];
     Label ShowLabel;
+    Label[] MovingLabels;
 
     //更新People狀態
     public void UpdateFriend(List<People> peopleList) //List people
     {
-        List<int> idList = new List<int>();
+        _infectPoepleList.Clear();
 
-        int friendNum = peopleList.Count; 
-
-        for (int i = 0; i < friendNum; i++)
+        for (int i = 0; i < peopleList.Count; i++)
         {
-            idList.Add(peopleList[i].ID); //這裡改成People List的ID
+            _infectPoepleList.Add(peopleList[i].ID); //這裡改成People List的ID
         }
 
         int rndNumber = 0;
@@ -53,7 +53,7 @@ public class MainUIController : MonoBehaviour
         {
             rndNumber = UnityEngine.Random.Range(0, 3);
 
-            if (idList.Contains(i)) AudButtons[i].style.backgroundImage = friendPic[rndNumber];
+            if (_infectPoepleList.Contains(i)) AudButtons[i].style.backgroundImage = friendPic[rndNumber];
             else AudButtons[i].style.backgroundImage = nonePic[rndNumber];
 
             AudLabels[i].text = "";
@@ -105,6 +105,7 @@ public class MainUIController : MonoBehaviour
 
         int actID = 0;
         string actText = "";
+        _canPressList.Clear();
 
         int rndNumber = 0;
 
@@ -112,6 +113,7 @@ public class MainUIController : MonoBehaviour
         {
             actID = peopleList[i].ID;
             actText = peopleList[i].Talk;
+            _canPressList.Add(actID);
 
             rndNumber = UnityEngine.Random.Range(0, 3);
 
@@ -146,12 +148,18 @@ public class MainUIController : MonoBehaviour
 
     private void ClickActor(ClickEvent clickEvent)
     {
-        if (_canPress==false) return;
+        if (_canPress == false) return;
+
         var panel = clickEvent.target as Button;
         int pressID = Int32.Parse(panel.text);
 
+        if (!_canPressList.Contains(pressID)) return;
+
         string pressString = AudLabels[pressID].text;
         string correctString = _answerString[_currentPress];
+
+        _canPressList.Remove(pressID);
+        AudLabels[pressID].style.visibility = Visibility.Hidden;
 
         if (pressString == correctString)
         {
@@ -162,6 +170,27 @@ public class MainUIController : MonoBehaviour
             if (_currentPress >= _maxPress) JudgeRight();
         }
         else JudgeWrong();
+    }
+
+    private void ActorPointed(MouseEnterEvent mouseEnterEvent)
+    {
+        if (_canPress == false) return;
+
+        var panel = mouseEnterEvent.target as Button;
+        int pressID = Int32.Parse(panel.text);
+
+        if (!_canPressList.Contains(pressID)) return;
+
+        panel.style.scale = new Vector2(1.2f, 1.2f);
+
+    }
+
+    private void ActorLeave(MouseLeaveEvent mouseLeaveEvent)
+    {
+        var panel = mouseLeaveEvent.target as Button;
+        int pressID = Int32.Parse(panel.text);
+
+        panel.style.scale = new Vector2(1, 1);
     }
 
     private void Awake()
@@ -202,6 +231,8 @@ public class MainUIController : MonoBehaviour
             AudButtons[i] = AudPanels[i].Q<Button>("AudButton");
             AudButtons[i].text = i.ToString();
             AudButtons[i].RegisterCallback<ClickEvent>(ClickActor);
+            AudButtons[i].RegisterCallback<MouseEnterEvent>(ActorPointed);
+            AudButtons[i].RegisterCallback<MouseLeaveEvent>(ActorLeave);
         }
     }
 
