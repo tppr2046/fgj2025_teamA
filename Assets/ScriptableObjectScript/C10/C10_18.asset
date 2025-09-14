@@ -18,4 +18,6 @@ MonoBehaviour:
   - "\u904A\u6232"
   - "\u4E0D\u662F"
   - "\u73A9\u5177"
-  WrongAnswers: []
+  WrongAnswers:
+  - "\u662F"
+  - "\u5C31\u662F"

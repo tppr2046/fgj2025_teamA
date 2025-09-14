@@ -19,4 +19,7 @@ MonoBehaviour:
   - "\u7FFB\u8F49"
   - "\u4EBA\u751F"
   - "\u7684\u6B66\u5668"
-  WrongAnswers: []
+  WrongAnswers:
+  - "\u662F\u4F60"
+  - "\u4EBA\u53C3"
+  - "\u626D\u8F49"
