@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 
 public class MainUIController : MonoBehaviour
 {
+    [SerializeField] GameManager gameManager;
     [SerializeField] Texture2D[] nonePic;
     [SerializeField] Texture2D[] friendPic;
     [SerializeField] Texture2D[] actorPic;
@@ -15,9 +16,12 @@ public class MainUIController : MonoBehaviour
     [SerializeField] float rightTime = 3;
     [SerializeField] float wrongTime = 3;
     [SerializeField] float noAnswerTime = 3;
-    [SerializeField] GameManager gameManager;
+    [SerializeField] float movingLabelTime = 1;
 
     private bool _canPress = false;
+    private bool[] _startMove = new bool[5];
+    private Vector2[] _moveSpeed = new Vector2[5];
+    private float[] _moveStartTime = new float[5];
     private float _actionStartTime = 0;
     private int _currentPress;
     private int _maxPress;
@@ -35,7 +39,7 @@ public class MainUIController : MonoBehaviour
     Label[] AudLabels = new Label[45];
     Button[] AudButtons = new Button[45];
     Label ShowLabel;
-    Label[] MovingLabels;
+    Label[] MovingLabels = new Label[5];
 
     //更新People狀態
     public void UpdateFriend(List<People> peopleList) //List people
@@ -164,8 +168,21 @@ public class MainUIController : MonoBehaviour
         if (pressString == correctString)
         {
             //播放正確字串移動
+            int xLeft = ((pressID + 1) % 15) - 1;
+            if (xLeft == -1) xLeft = 14;
+            int yLeft = Mathf.FloorToInt(pressID / 15);
 
-            ActionLabels[_currentPress].style.color = RightColor;
+            Vector2 startPos = new Vector2(1 + xLeft * 6.5f, 41 + yLeft * 20);
+            _moveSpeed[_currentPress] = (new Vector2(46.5f + _currentPress * 10.875f, 29) - startPos) / movingLabelTime;
+
+            MovingLabels[_currentPress].style.left = Length.Percent(startPos.x);
+            MovingLabels[_currentPress].style.top = Length.Percent(startPos.y);
+            MovingLabels[_currentPress].text = pressString;
+            MovingLabels[_currentPress].style.visibility = Visibility.Visible;
+           
+            _moveStartTime[_currentPress] = 0;
+            _startMove[_currentPress] = true;
+            
             _currentPress++;
             if (_currentPress >= _maxPress) JudgeRight();
         }
@@ -217,6 +234,12 @@ public class MainUIController : MonoBehaviour
                 ActionDashs[i] = rootVisualElement.Q<Label>("DashLabel" + i.ToString());
                 ActionDashs[i].style.visibility = Visibility.Hidden;
             }
+
+            MovingLabels[i] = rootVisualElement.Q<Label>("MovingLabel" + i.ToString());
+            MovingLabels[i].text = "";
+            MovingLabels[i].style.visibility = Visibility.Hidden;
+            _startMove[i] = false;
+
         }
 
         CountDownBar = rootVisualElement.Q<VisualElement>("CountDownBar");
@@ -238,6 +261,24 @@ public class MainUIController : MonoBehaviour
 
     private void Update()
     {
+        for (int i = 0; i < 5; i++)
+        {
+            if (_startMove[i])
+            {
+                MovingLabels[i].style.left = Length.Percent(MovingLabels[i].style.left.value.value + _moveSpeed[i].x * Time.deltaTime);
+                MovingLabels[i].style.top = Length.Percent(MovingLabels[i].style.top.value.value + _moveSpeed[i].y * Time.deltaTime);
+
+                _moveStartTime[i] += Time.deltaTime;
+                
+                if (_moveStartTime[i] >= movingLabelTime)
+                {
+                    _startMove[i] = false;
+                    MovingLabels[i].style.visibility = Visibility.Hidden;
+                    ActionLabels[i].style.color = RightColor;
+                }
+
+            }
+        }
         if (_canPress == false) return;
 
         _actionStartTime += Time.deltaTime;
