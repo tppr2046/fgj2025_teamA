@@ -22,9 +22,13 @@ public class Scenemanager : MonoBehaviour
 
     }
 
-    public void LoadScoreScene()
+    public void BTNGiver(Button button)
     {
 
+        button.onClick.AddListener(LoadMenuScene);
+    }
+    public void LoadScoreScene()
+    {
         SceneManager.LoadSceneAsync(2);
     }
     public void LoadGameScene()

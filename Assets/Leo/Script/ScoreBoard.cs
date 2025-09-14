@@ -12,9 +12,10 @@ public class ScoreBoard : MonoBehaviour
     public Slider slider;
     public float SmileScore = 0.1f;
     public float targetValue;
-    public GameObject G_End, B_End;
+    public GameObject G_End, B_End,BackBTN;
     public AudioSource sus_a;
     public bool CanOut;
+    
     void Start()
     {
         score = Scenemanager.Score;
@@ -44,7 +45,9 @@ public class ScoreBoard : MonoBehaviour
             G_End.SetActive(true);
             StartCoroutine(S());
         }else B_End.SetActive(true);
-        CanOut = true;
+        //CanOut = true;
+        BackBTN.SetActive(true);
+        Scenemanager.Instance.BTNGiver(BackBTN.GetComponent<Button>());
     }
     IEnumerator S()
     {
