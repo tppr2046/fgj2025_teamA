@@ -8338,6 +8338,7 @@ MonoBehaviour:
   FriendLimit: 8
   WinFriend: 3
   mainUIController: {fileID: 2132424447}
+  s: 0
 --- !u!4 &2059760037
 Transform:
   m_ObjectHideFlags: 0
@@ -8684,9 +8685,9 @@ SceneRoots:
   - {fileID: 270490714}
   - {fileID: 1722800963}
   - {fileID: 1787782078}
-  - {fileID: 473480926}
   - {fileID: 261595562}
   - {fileID: 1560988862}
+  - {fileID: 473480926}
   - {fileID: 2059760037}
   - {fileID: 1509495572}
   - {fileID: 1462831648}
