@@ -2071,7 +2071,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &473480925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8325,7 +8325,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 152b837ec0be50a488fc6d647eb69799, type: 2}
   - {fileID: 11400000, guid: 626980aaaee29a947a4bf89359c58a1a, type: 2}
   CurrentLevel: {fileID: 0}
-  CurrentLevelCount: 24
+  CurrentLevelCount: -1
   CurrentLevelAnswerIndex: 0
   CurrentLevelAnswer: 
   StartFriendCount: 5
