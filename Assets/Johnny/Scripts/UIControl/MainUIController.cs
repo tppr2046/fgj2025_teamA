@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
@@ -20,8 +19,10 @@ public class MainUIController : MonoBehaviour
     [SerializeField] float noAnswerTime = 3;
     [SerializeField] float movingLabelTime = 1;
     [SerializeField] float audHighFreqTime = 0.1f;
-    [SerializeField] UnityEvent OnActionRight;
-    [SerializeField] UnityEvent OnActionWrong;
+    [SerializeField] UnityEvent OnTalk;
+    [SerializeField] ParticleSystem sucessParticle;
+    [SerializeField] AudioSource successAudio;
+    [SerializeField] AudioSource failureAudio;
 
     private bool _canPress = false;
     private bool _audHigh = false;
@@ -76,6 +77,8 @@ public class MainUIController : MonoBehaviour
     {
         MainTextLabel.text = textSHow;
 
+        if (OnTalk != null) OnTalk.Invoke();
+
         for (int i = 0; i < 5; i++)
         {
             ActionLabels[i].style.visibility = Visibility.Hidden;
@@ -92,6 +95,8 @@ public class MainUIController : MonoBehaviour
     public void ActionStart(string textSHow, List<People> peopleList, string[] answers) 
     {
         MainTextLabel.text = textSHow;
+
+        if (OnTalk != null) OnTalk.Invoke();
 
         _maxPress = answers.Length; 
         _currentPress = 0;
@@ -145,7 +150,8 @@ public class MainUIController : MonoBehaviour
         _canPress = false;
         CountDownBar.style.visibility = Visibility.Hidden;
 
-        if (OnActionRight != null) OnActionRight.Invoke();
+        successAudio.Play();
+        sucessParticle.Play();
 
         _audStartTime = 0;
         _audHigh = true;
@@ -157,7 +163,9 @@ public class MainUIController : MonoBehaviour
     private void JudgeWrong()
     {
         _canPress = false;
-        //播放失敗動畫
+
+        failureAudio.Play();
+
         CountDownBar.style.visibility = Visibility.Hidden;
         StartCoroutine(Wrong());
     }
@@ -330,13 +338,10 @@ public class MainUIController : MonoBehaviour
 
     IEnumerator Right()
     {
-        ShowLabel.text = "成功!";
-        ShowLabel.style.visibility = Visibility.Visible;
         yield return new WaitForSeconds(rightTime);
-        ShowLabel.style.visibility = Visibility.Hidden;
         _audHigh = false;
+        successAudio.Stop();
         gameManager.WinRound();
-
     }
     IEnumerator Wrong()
     {
@@ -344,6 +349,7 @@ public class MainUIController : MonoBehaviour
         ShowLabel.style.visibility = Visibility.Visible;
         yield return new WaitForSeconds(wrongTime);
         ShowLabel.style.visibility = Visibility.Hidden;
+        failureAudio.Stop();
         gameManager.LostRound();
 
     }
