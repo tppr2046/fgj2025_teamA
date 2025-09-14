@@ -7769,6 +7769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f69014d3817b97044b0fd0e7c9ec9fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 2059760036}
   nonePic:
   - {fileID: 2800000, guid: 9de61e369d99d6d4db25c44afb056b53, type: 3}
   - {fileID: 2800000, guid: a04029dedb71b754fb8c183ae3beec28, type: 3}
@@ -7783,11 +7784,18 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 71167f89fd5a98f408a5bd1344966714, type: 3}
   normalColor: {r: 0, g: 1, b: 0.9600265, a: 1}
   RightColor: {r: 0.37017822, g: 1, b: 0, a: 1}
-  actionTime: 5
+  actionTime: 6
   rightTime: 3
   wrongTime: 3
-  noAnswerTime: 3
-  gameManager: {fileID: 2059760036}
+  noAnswerTime: 2
+  movingLabelTime: 0.5
+  audHighFreqTime: 0.05
+  OnActionRight:
+    m_PersistentCalls:
+      m_Calls: []
+  OnActionWrong:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2132424448
 MonoBehaviour:
   m_ObjectHideFlags: 0
