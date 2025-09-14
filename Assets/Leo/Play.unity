@@ -1901,6 +1901,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e82289ab7464f242a62784d0e4d53d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &428110254 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2259034391538627032, guid: c6f0cb06702093240b49cdf15eee5d01, type: 3}
+  m_PrefabInstance: {fileID: 1509495572}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &435454229 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4005570874120585155, guid: f9d3fecf5cb39d243869d23ed96e54c5, type: 3}
@@ -8424,6 +8429,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 428110254}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: head_up
           m_BoolArgument: 0
         m_CallState: 2
   sucessParticle: {fileID: 10182446}

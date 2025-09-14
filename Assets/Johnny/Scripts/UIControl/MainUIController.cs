@@ -77,8 +77,6 @@ public class MainUIController : MonoBehaviour
     {
         MainTextLabel.text = textSHow;
 
-        if (OnTalk != null) OnTalk.Invoke();
-
         for (int i = 0; i < 5; i++)
         {
             ActionLabels[i].style.visibility = Visibility.Hidden;
