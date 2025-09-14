@@ -4696,8 +4696,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_Resource: {fileID: 8300000, guid: 93b45095cb08b304a8951cdfd4b7d3fc, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -4934,7 +4934,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 0
+  Priority: 128
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -5629,7 +5629,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 4257a974edab6614387521db7a245aee, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -8410,12 +8410,6 @@ MonoBehaviour:
   noAnswerTime: 2
   movingLabelTime: 0.5
   audHighFreqTime: 0.05
-  OnActionRight:
-    m_PersistentCalls:
-      m_Calls: []
-  OnActionWrong:
-    m_PersistentCalls:
-      m_Calls: []
   OnTalk:
     m_PersistentCalls:
       m_Calls:
@@ -8432,6 +8426,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   sucessParticle: {fileID: 10182446}
+  successAudio: {fileID: 1338917007}
+  failureAudio: {fileID: 1189123592}
 --- !u!114 &2132424448
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,10 +19,10 @@ public class MainUIController : MonoBehaviour
     [SerializeField] float noAnswerTime = 3;
     [SerializeField] float movingLabelTime = 1;
     [SerializeField] float audHighFreqTime = 0.1f;
-    [SerializeField] UnityEvent OnActionRight;
-    [SerializeField] UnityEvent OnActionWrong;
     [SerializeField] UnityEvent OnTalk;
     [SerializeField] ParticleSystem sucessParticle;
+    [SerializeField] AudioSource successAudio;
+    [SerializeField] AudioSource failureAudio;
 
     private bool _canPress = false;
     private bool _audHigh = false;
@@ -150,7 +150,7 @@ public class MainUIController : MonoBehaviour
         _canPress = false;
         CountDownBar.style.visibility = Visibility.Hidden;
 
-        if (OnActionRight != null) OnActionRight.Invoke();
+        successAudio.Play();
         sucessParticle.Play();
 
         _audStartTime = 0;
@@ -163,7 +163,9 @@ public class MainUIController : MonoBehaviour
     private void JudgeWrong()
     {
         _canPress = false;
-        //播放失敗動畫
+
+        failureAudio.Play();
+
         CountDownBar.style.visibility = Visibility.Hidden;
         StartCoroutine(Wrong());
     }
@@ -338,6 +340,7 @@ public class MainUIController : MonoBehaviour
     {
         yield return new WaitForSeconds(rightTime);
         _audHigh = false;
+        successAudio.Stop();
         gameManager.WinRound();
     }
     IEnumerator Wrong()
@@ -346,6 +349,7 @@ public class MainUIController : MonoBehaviour
         ShowLabel.style.visibility = Visibility.Visible;
         yield return new WaitForSeconds(wrongTime);
         ShowLabel.style.visibility = Visibility.Hidden;
+        failureAudio.Stop();
         gameManager.LostRound();
 
     }
