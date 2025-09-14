@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
@@ -46,6 +47,7 @@ public class MainUIController : MonoBehaviour
     VisualElement[] AudPanels = new VisualElement[45];
     Label[] AudLabels = new Label[45];
     Button[] AudButtons = new Button[45];
+    VisualElement[] Ping = new VisualElement[45];
     Label ShowLabel;
     Label[] MovingLabels = new Label[5];
 
@@ -70,6 +72,7 @@ public class MainUIController : MonoBehaviour
 
             AudLabels[i].text = "";
             AudLabels[i].style.visibility = Visibility.Hidden;
+            Ping[i].style.visibility = Visibility.Hidden;
         }
     }
 
@@ -94,14 +97,30 @@ public class MainUIController : MonoBehaviour
     {
         MainTextLabel.text = textSHow;
 
+        for (int i = 0; i < 5; i++)
+        {
+            ActionLabels[i].style.visibility = Visibility.Hidden;
+
+            if (i < 4)
+            {
+                ActionDashs[i].style.visibility = Visibility.Hidden;
+            }
+        }
+
+        StartCoroutine(ReactTalk(peopleList, answers));
+    }
+
+    private void ReactionStart(List<People> peopleList, string[] answers)
+    {
+
         if (OnTalk != null) OnTalk.Invoke();
 
-        _maxPress = answers.Length; 
+        _maxPress = answers.Length;
         _currentPress = 0;
 
-        for (int i = 0; i < 5; i++) 
+        for (int i = 0; i < 5; i++)
         {
-            if (i < _maxPress) 
+            if (i < _maxPress)
             {
                 ActionLabels[i].text = answers[i];
                 ActionLabels[i].style.color = normalColor;
@@ -134,6 +153,7 @@ public class MainUIController : MonoBehaviour
             AudButtons[actID].style.backgroundImage = actorPic[rndNumber];
             AudLabels[actID].text = actText;
             AudLabels[actID].style.visibility = Visibility.Visible;
+            Ping[actID].style.visibility = Visibility.Visible;
         }
 
         CountDownBar.style.width = Length.Percent(100);
@@ -182,6 +202,7 @@ public class MainUIController : MonoBehaviour
 
         _canPressList.Remove(pressID);
         AudLabels[pressID].style.visibility = Visibility.Hidden;
+        Ping[pressID].style.visibility = Visibility.Hidden;
 
         if (pressString == correctString)
         {
@@ -275,12 +296,31 @@ public class MainUIController : MonoBehaviour
             AudButtons[i].RegisterCallback<ClickEvent>(ClickActor);
             AudButtons[i].RegisterCallback<MouseEnterEvent>(ActorPointed);
             AudButtons[i].RegisterCallback<MouseLeaveEvent>(ActorLeave);
+            Ping[i] = AudPanels[i].Q<VisualElement>("Ping");
+            Ping[i].style.visibility = Visibility.Hidden;
         }
     }
 
     private void Update()
     {
+        for (int i = 0; i < 5; i++)
+        {
+            if (_startMove[i])
+            {
+                MovingLabels[i].style.left = Length.Percent(MovingLabels[i].style.left.value.value + _moveSpeed[i].x * Time.deltaTime);
+                MovingLabels[i].style.top = Length.Percent(MovingLabels[i].style.top.value.value + _moveSpeed[i].y * Time.deltaTime);
 
+                _moveStartTime[i] += Time.deltaTime;
+
+                if (_moveStartTime[i] >= movingLabelTime)
+                {
+                    _startMove[i] = false;
+                    MovingLabels[i].style.visibility = Visibility.Hidden;
+                    ActionLabels[i].style.color = RightColor;
+                }
+
+            }
+        }
 
         if (_audHigh)
         {
@@ -312,27 +352,6 @@ public class MainUIController : MonoBehaviour
 
         if (_actionStartTime >= actionTime) JudgeWrong();
     }
-    private void FixedUpdate()
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            if (_startMove[i])
-            {
-                MovingLabels[i].style.left = Length.Percent(MovingLabels[i].style.left.value.value + _moveSpeed[i].x * Time.deltaTime);
-                MovingLabels[i].style.top = Length.Percent(MovingLabels[i].style.top.value.value + _moveSpeed[i].y * Time.deltaTime);
-
-                _moveStartTime[i] += Time.deltaTime;
-
-                if (_moveStartTime[i] >= movingLabelTime)
-                {
-                    _startMove[i] = false;
-                    MovingLabels[i].style.visibility = Visibility.Hidden;
-                    ActionLabels[i].style.color = RightColor;
-                }
-
-            }
-        }
-    }
 
     IEnumerator Right()
     {
@@ -355,5 +374,11 @@ public class MainUIController : MonoBehaviour
     {
         yield return new WaitForSeconds(noAnswerTime);
         gameManager.NextRound();
+    }
+
+    IEnumerator ReactTalk(List<People> peopleList, string[] answers)
+    {
+        yield return new WaitForSeconds(noAnswerTime);
+        ReactionStart(peopleList, answers);
     }
 }
