@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
@@ -22,6 +21,8 @@ public class MainUIController : MonoBehaviour
     [SerializeField] float audHighFreqTime = 0.1f;
     [SerializeField] UnityEvent OnActionRight;
     [SerializeField] UnityEvent OnActionWrong;
+    [SerializeField] UnityEvent OnTalk;
+    [SerializeField] ParticleSystem sucessParticle;
 
     private bool _canPress = false;
     private bool _audHigh = false;
@@ -76,6 +77,8 @@ public class MainUIController : MonoBehaviour
     {
         MainTextLabel.text = textSHow;
 
+        if (OnTalk != null) OnTalk.Invoke();
+
         for (int i = 0; i < 5; i++)
         {
             ActionLabels[i].style.visibility = Visibility.Hidden;
@@ -92,6 +95,8 @@ public class MainUIController : MonoBehaviour
     public void ActionStart(string textSHow, List<People> peopleList, string[] answers) 
     {
         MainTextLabel.text = textSHow;
+
+        if (OnTalk != null) OnTalk.Invoke();
 
         _maxPress = answers.Length; 
         _currentPress = 0;
@@ -146,6 +151,7 @@ public class MainUIController : MonoBehaviour
         CountDownBar.style.visibility = Visibility.Hidden;
 
         if (OnActionRight != null) OnActionRight.Invoke();
+        sucessParticle.Play();
 
         _audStartTime = 0;
         _audHigh = true;
@@ -330,13 +336,9 @@ public class MainUIController : MonoBehaviour
 
     IEnumerator Right()
     {
-        ShowLabel.text = "жие\!";
-        ShowLabel.style.visibility = Visibility.Visible;
         yield return new WaitForSeconds(rightTime);
-        ShowLabel.style.visibility = Visibility.Hidden;
         _audHigh = false;
         gameManager.WinRound();
-
     }
     IEnumerator Wrong()
     {
