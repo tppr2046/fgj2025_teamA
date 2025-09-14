@@ -4,13 +4,13 @@ using UnityEngine;
 public class RandomMove2D : MonoBehaviour
 {
     [Header("移動設定")]
-    public float moveSpeed = 1f;               // 移動速度
+    public float moveSpeed = 0.7f;               // 移動速度
     public float minChangeTime = 1f;           // 方向最短持續時間
-    public float maxChangeTime = 3f;           // 方向最長持續時間
+    public float maxChangeTime = 1.5f;           // 方向最長持續時間
 
     [Header("移動範圍限制")]
     public float minX = -5f; // 左邊界
-    public float maxX = 5f;  // 右邊界
+    public float maxX = -2f;  // 右邊界
 
     [Header("停頓相關")]
     [Range(0f, 1f)] public float idleProbability = 0.2f;  // 停頓機率 (預設 60%)
