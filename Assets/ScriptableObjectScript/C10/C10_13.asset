@@ -17,4 +17,6 @@ MonoBehaviour:
   Answers:
   - "\u6B61\u547C"
   - "\u6B61\u547C"
-  WrongAnswers: []
+  WrongAnswers:
+  - "\u6BD4\u6211\u5C11"
+  - "\u5C41\u5566"

@@ -16,4 +16,5 @@ MonoBehaviour:
   Content: "\u5404\uFF01\u4F4D\uFF01\u5925\uFF01\u4F34\uFF01"
   Answers:
   - "\u6B61\u547C"
-  WrongAnswers: []
+  WrongAnswers:
+  - "\u4F60\u8AB0"
