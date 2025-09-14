@@ -1872,7 +1872,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &473480925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7704,7 +7704,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 152b837ec0be50a488fc6d647eb69799, type: 2}
   - {fileID: 11400000, guid: 626980aaaee29a947a4bf89359c58a1a, type: 2}
   CurrentLevel: {fileID: 0}
-  CurrentLevelCount: -1
+  CurrentLevelCount: 24
   CurrentLevelAnswerIndex: 0
   CurrentLevelAnswer: 
   StartFriendCount: 5
@@ -7712,6 +7712,7 @@ MonoBehaviour:
   FriendLimit: 8
   WinFriend: 3
   mainUIController: {fileID: 2132424447}
+  s: 0
 --- !u!4 &2059760037
 Transform:
   m_ObjectHideFlags: 0
@@ -8026,9 +8027,9 @@ SceneRoots:
   - {fileID: 270490714}
   - {fileID: 1722800963}
   - {fileID: 1787782078}
-  - {fileID: 473480926}
   - {fileID: 261595562}
   - {fileID: 1560988862}
+  - {fileID: 473480926}
   - {fileID: 2059760037}
   - {fileID: 1509495572}
   - {fileID: 1462831648}
